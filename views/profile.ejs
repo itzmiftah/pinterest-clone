@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>profile</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.7.0/fonts/remixicon.css" rel="stylesheet">
+
+</head>
+
+<Body> 
+  <div class="w-full px-10 py-3 flex justify-between bg-zinc-800 text-white items-center">
+    <h3>Pinterest</h3>
+    <div class="flex gap-10 items-center ">
+      <a href="/">Home</a><a href="/feed">Feed</a><a class="px-3 py-2 bg-red-700 text-white rounded-lg"
+        href="/logout">Logout</a>
+    </div>
+  </div>
+  <div class="profile w-full min-h-screen bg-zinc-800 text-white pt-1">
+
+    <form id="uploadform" hidden action="fileupload" method="post" enctype="multipart/form-data">
+      <input type="file" name="image">
+    </form>
+
+    <div class="profdets flex flex-col items-center mt-20">
+      <div class="relative">
+        <span id="uploadicon"
+          class="w-8 h-8 absolute bottom-0 right-0 rounded-full flex items-center justify-center bg-zinc-200">
+          <i class="text-zinc-800 ri-pencil-fill"></i>
+        </span>
+        <div class="w-32 h-32 bg-zinc-200 rounded-full overflow-hidden">
+          <img class="w-full h-full object-cover" src="/images/uploads/<%=user.profileImage %>" alt="">
+        </div>
+      </div>
+      <h1 class="text-3xl font-semibold mt-5">
+        <%= user.fullname %>
+      </h1>
+      <h3 class="text-md">
+        @<%= user.username %>
+      </h3>
+      <a href="/edit" class="mt-5 px-7 py-2 bg-zinc-700 rounded-full text-xs font-semibold">edit</a>
+      <a href="/add" <button class="px-10 py-2 rounded-lg bg-red-700 text-xs font-semibold mt-10">Add New Post</button>
+      </a>
+    </div>
+    <div class="w-full min-h-screen bg-zinc-800 px-10 py-8 text-white">
+      <div class="cards flex flex-wrap gap-10">
+        <a href="/show/post">
+          <div class="card_w-32">
+            <div class="w-40 h-40 bg-sky-200 rounded-lg overflow-hidden">
+               <img class="w-full h-full object-cover" src="/images/uploads/<%= user?.posts[0]?.image %>" alt="">  
+            </div>
+            <h5 class="mt-2 text-sm">
+             <%=user.posts.length %>  Pins
+            </h5>
+          </div>
+        </a>
+      </div>
+    
+    </div>
+
+  </div>
+
+</body>
+<script>
+  document.querySelector("#uploadicon").addEventListener("click", function () {
+    document.querySelector("#uploadform input").click();
+  })
+  document.querySelector("#uploadform input").addEventListener("change", function () {
+    document.querySelector("#uploadform").submit();
+  })
+</script>
+
+</html>
