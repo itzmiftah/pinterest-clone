@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
- const plm = require("passport-local-mongoose");
 
 mongoose.connect("mongodb+srv://miftahulislam138:pinterest123@cluster0.cnjupri.mongodb.net/pinterest?retryWrites=true&w=majority")
 
@@ -41,7 +40,6 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.plugin(plm);
 
 module.exports= mongoose.model('User', userSchema);
 
