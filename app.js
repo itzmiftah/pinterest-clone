@@ -17,7 +17,7 @@ app.set('view engine', 'ejs');
 
 app.use(cors (
   {
-  origin: [""],
+  origin: ["pinterest-clone-pi-five.vercel.app"],
   methods: ["POST", "GET"],
   credentials: true
   }
