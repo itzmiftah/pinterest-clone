@@ -1,4 +1,8 @@
 {
+  "engines":{
+    "node": "18.17.1" 
+  },
+  
   "name": "pinterest-clone",
 
   "version": "0.0.0",
