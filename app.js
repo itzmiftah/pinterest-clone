@@ -53,8 +53,18 @@ app.use(function(err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+
+app.all("*",(req, res, next) => {
+  next(new ExpressError(404, "Page Not Found"));
+});
+
+app.use((err, req,res, next) => {
+  let {statusCode = 500, message} = err;
+  // res.status(statusCode).send(message);
+  res.status(statusCode).render("error.ejs", {message})
+  
+});
+
 });
 
 module.exports = app;
