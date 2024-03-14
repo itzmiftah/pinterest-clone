@@ -5,10 +5,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const expresssession = require("express-session");
-<<<<<<< HEAD
-=======
-const MemoryStore = require('memorystore');
->>>>>>> 5b4306d8521cb55dcaeb85fed3d553ee755507d4
 const flash = require("connect-flash");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
