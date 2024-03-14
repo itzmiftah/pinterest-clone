@@ -23,7 +23,10 @@ app.use(flash());
 app.use(expresssession({
   resave: false,
   saveUninitialized: false,
-  secret: "miftah"
+  secret: "miftah123",
+  cookie:{
+    secure: true
+       }
 }));
 
 app.use(passport.initialize());
