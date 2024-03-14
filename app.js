@@ -34,8 +34,7 @@ store.on("error", () =>{
 app.use(expresssession({
   resave: false,
   saveUninitialized: false,
-  secret: "miftah12345",
-  store: new mongoose(options)
+  secret: "miftah12345"
 }));
 
 app.use(passport.initialize());
