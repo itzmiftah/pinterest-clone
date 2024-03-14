@@ -5,6 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const expresssession = require("express-session");
+const MemoryStore = require('memorystore')(session);
 const flash = require("connect-flash");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -24,9 +25,10 @@ app.use(expresssession({
   resave: false,
   saveUninitialized: false,
   secret: "miftah123",
-  cookie:{
-    secure: true
-       }
+  cookie: { maxAge: 86400000 },
+  store: new MemoryStore({
+    checkPeriod: 86400000 // prune expired entries every 24h
+  }),
 }));
 
 app.use(passport.initialize());
