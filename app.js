@@ -1,10 +1,11 @@
 var createError = require('http-errors');
 var express = require('express');
 const dotenv = require("dotenv").config();
+const ExpressError = require("./utils/expressError");
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const expresssession = require("express-session");
+const session = require("express-session");
 const MongoStore = require('connect-mongo');
 const flash = require("connect-flash");
 var indexRouter = require('./routes/index');
@@ -16,7 +17,7 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(flash());
+
 
 
 const store = MongoStore.create({
@@ -31,15 +32,24 @@ store.on("error", () =>{
   console.log("Session Store Error!", err);
 })
 
-app.use(expresssession({
+const sessionOptions = {
+  store,
+  secret: process.env.SECRET,
   resave: false,
-  saveUninitialized: false,
-  secret: "miftah12345",
-  store: new mongoose(options)
-}));
+  saveUninitialized: true,
+  cookie: {
+    express: Date.now() + 7 * 24 * 60 * 60 * 1000,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
+  }
+};
+app.use(session(sessionOptions));
+app.use(flash());
+
 
 app.use(passport.initialize());
 app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(usersRouter.serializeUser());
 passport.deserializeUser(usersRouter.deserializeUser());
 
