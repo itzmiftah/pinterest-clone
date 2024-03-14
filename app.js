@@ -5,6 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const expresssession = require("express-session");
+const MongoStore = require('connect-mongo');
 const flash = require("connect-flash");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -17,10 +18,24 @@ app.set('view engine', 'ejs');
 
 app.use(flash());
 
+
+const store = MongoStore.create({
+  mongoUrl: process.env.MONGODB_URI,
+  crypto: {
+    secret: process.env.SECRET,
+  },
+  touchAfter: 24 * 3600,
+})
+
+store.on("error", () =>{
+  console.log("Session Store Error!", err);
+})
+
 app.use(expresssession({
   resave: false,
   saveUninitialized: false,
-  secret: "miftah12345"
+  secret: "miftah12345",
+  store: new mongoose(options)
 }));
 
 app.use(passport.initialize());
