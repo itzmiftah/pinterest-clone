@@ -36,7 +36,7 @@ const sessionOptions = {
   store,
   secret: process.env.SECRET,
   resave: false,
-<<<<<<< HEAD
+
   saveUninitialized: true,
   cookie: {
     express: Date.now() + 7 * 24 * 60 * 60 * 1000,
@@ -47,15 +47,8 @@ const sessionOptions = {
 app.use(session(sessionOptions));
 app.use(flash());
 
-=======
-  saveUninitialized: false,
-  secret: "miftah12345"
-}));
->>>>>>> d6a2706089e7268576791cc027d21790c2c5f725
-
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(usersRouter.serializeUser());
 passport.deserializeUser(usersRouter.deserializeUser());
 
