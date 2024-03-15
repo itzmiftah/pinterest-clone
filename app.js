@@ -36,7 +36,10 @@ const sessionOptions = {
   store,
   secret: process.env.SECRET,
   resave: false,
+<<<<<<< HEAD
 
+=======
+>>>>>>> f62543bae3c0d9fb9c2688c1a4765dcacf658806
   saveUninitialized: true,
   cookie: {
     express: Date.now() + 7 * 24 * 60 * 60 * 1000,
@@ -46,7 +49,10 @@ const sessionOptions = {
 };
 app.use(session(sessionOptions));
 app.use(flash());
+<<<<<<< HEAD
 
+=======
+>>>>>>> f62543bae3c0d9fb9c2688c1a4765dcacf658806
 app.use(passport.initialize());
 app.use(passport.session());
 passport.serializeUser(usersRouter.serializeUser());
