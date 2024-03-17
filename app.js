@@ -1,5 +1,4 @@
-var createError = require('http-errors');
-var express = require('express');
+const express = require('express');
 const dotenv = require("dotenv").config();
 const ExpressError = require("./utils/expressError");
 var path = require('path');
@@ -11,7 +10,9 @@ const flash = require("connect-flash");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const passport = require('passport');
+const connectDB = require('./db/index.js')
 const app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
